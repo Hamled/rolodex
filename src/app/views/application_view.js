@@ -1,5 +1,5 @@
 import Backbone from 'backbone';
-import ContactView from 'app/views/contact_view';
+import RolodexView from 'app/views/rolodex_view';
 
 const ApplicationView = Backbone.View.extend({
   initialize: function() {
@@ -7,10 +7,11 @@ const ApplicationView = Backbone.View.extend({
   },
 
   render: function() {
-    const card = new ContactView({
-      model: this.model.contact,
+    const rolodexView = new RolodexView({
+      model: this.model.rolodex,
+      el: this.$('main')
     });
-    this.$('#contact-cards').append(card.render().$el);
+    rolodexView.render();
 
     return this;
   }
