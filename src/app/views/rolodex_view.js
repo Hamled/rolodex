@@ -2,6 +2,10 @@ import Backbone from 'backbone';
 import ContactView from 'app/views/contact_view';
 
 const RolodexView = Backbone.View.extend({
+  initialize: function() {
+    this.listenTo(this.model, 'update', this.render);
+  },
+
   render: function() {
     // Clear out the list first
     // we'll add all of the cards back afterwards
