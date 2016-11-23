@@ -1,9 +1,20 @@
+import _ from 'underscore';
 import Backbone from 'backbone';
 import ContactView from 'app/views/contact_view';
 
 const RolodexView = Backbone.View.extend({
   initialize: function() {
+    this.detailsTemplate = _.template(Backbone.$('#tmpl-contact-details').html());
+    this.detailsModal = this.$('#contact-details');
+    this.detailsModal.hide(); // Modal starts hidden
+
     this.listenTo(this.model, 'update', this.render);
+  },
+
+  showCard: function(card) {
+    const cardDetails = this.detailsTemplate(card.model.attributes);
+    this.detailsModal.html(cardDetails);
+    this.detailsModal.show();
   },
 
   render: function() {
@@ -17,6 +28,7 @@ const RolodexView = Backbone.View.extend({
       const card = new ContactView({
         model: contact
       });
+      self.listenTo(card, 'select', self.showCard);
 
       cardList.append(card.render().$el);
     });

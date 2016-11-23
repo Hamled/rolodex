@@ -64,8 +64,3 @@ header {
 .contact-card:hover h3 {
   color: white;
 }
-
-/* TAKE THESE OUT LATER */
-#contact-details {
-  display: none;
-}
